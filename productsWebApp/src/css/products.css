@@ -1,0 +1,105 @@
+.reset-a, .reset-a:hover, .reset-a:visited, .reset-a:focus, .reset-a:active  {
+  text-decoration: none;
+  color: inherit;
+  outline: 0;
+}
+
+@media only screen and (min-width: 900px)
+{
+    .column {
+      float: left;
+      width: 33%;
+    }
+}
+
+@media only screen and (max-width: 400px)
+{
+.column {
+  float: left;
+  width: 50%;
+}
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.title
+{
+    font-family: Arial,sans-serif
+    font-size: 14px;
+    font-weight: 300;
+    position: absolute;
+    color: #363636;
+    background: rgb(0, 0, 0);
+    background: rgba(238, 235, 235, 0.3);
+}
+
+.image_main
+{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    position: relative;
+}
+
+.detail_right {
+  float: left;
+  width: 50%;
+}
+
+.detail_left
+{
+  float: left;
+  width: 50%;
+}
+
+.detail_title
+{
+    background-color: #EEEBEB;
+    font-size: 30px;
+    font-weight: normal;
+    height: 50px;
+}
+
+.detail_original_price
+{
+    color: #565458;
+    font-size: 20px;
+    font-weight: normal;
+    text-decoration: line-through;
+}
+
+.detail_price
+{
+    color: #af1a31;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.image_carousel
+{
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 5px;
+    width: 180px;
+    height: 100px;
+}
+
+.carousel
+{
+    clear: both;
+    float: left;
+    display : flex;
+      align-items : center;
+}
+
+.carousel_navigator
+{
+    font-weight: bold;
+    font-size: 40px;
+    color: grey;
+    cursor: pointer;
+}
