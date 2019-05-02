@@ -1,5 +1,6 @@
 package com.williamsonoma;
 import java.util.Arrays;
+import java.util.List;
 
 import static java.lang.System.out;
 /**
@@ -20,9 +21,9 @@ public class App
                 new ZipCodeRange(94101,94100),
                 new ZipCodeRange(94226,94399)};
         ZipCodeHelper helper = new ZipCodeHelper();
-        ZipCodeRange[] result = helper.merge(zipCodes);
+        List<ZipCodeRange> result = helper.merge(zipCodes);
 
         out.printf("Input: %s\n", Arrays.toString(zipCodes));
-        out.printf("Output: %s\n", Arrays.toString(result));
+        out.printf("Output: %s\n", result.toString());
     }
 }

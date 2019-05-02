@@ -1,22 +1,52 @@
 package com.williamsonoma;
 
 import java.util.*;
-import static java.lang.System.out;
+import org.apache.log4j.Logger;
+
+/**
+ * Main class responsible for Merging Zip Code ranges.
+ *
+ * @author Sridhar Dhavala
+ *
+ */
 
 public class ZipCodeHelper {
-    //Merges zip code ranges,
-    //      Case 1: if the current range falls in existing range, it will be omitted, e.g. {1,4}, {2,3} results in {1,4}
-    //      Case 2: if it overlaps, then start and end will be adjusted accordingly, e.g. {1,3}, {2,5} results in {1,5}
-    public ZipCodeRange[] merge(ZipCodeRange[] zipCodes)
+    /**
+     * Instance of Logger object.
+     */
+    final static Logger logger = Logger.getLogger(ZipCodeHelper.class);
+    /*
+     * <p>This method merges an array of zip code ranges to form individual ranges.</p>
+     * @param zipCodes Individual ranges of zip coces.
+     * @return The merged zip code ranges by removing the overlaps and also merges continuous ranges to form a single range.
+     * Rules:
+     * 1: If the current range falls in existing range, it will be omitted, e.g. {1,4}, {2,3} results in {1,4}
+     * 2: If it overlaps, then start and end will be adjusted accordingly, e.g. {1,3}, {2,5} results in {1,5}
+     * 3: If there's a common range, the super set will be considered and current range will be ignored. e.g. {10,80},
+     * {15,25} results in {10,80}
+     */
+    public List<ZipCodeRange> merge(ZipCodeRange[] zipCodes)
     {
-        List<ZipCodeRange> result = new ArrayList<>(); //Don't know the size of result so considered list instead of array.
+        /**
+         * Variable to store the result of the zip code ranges after merging.
+         */
+        List<ZipCodeRange> result;
 
-        if (zipCodes == null || zipCodes.length < 2) {
-            out.println("zipCodes is null or its length is less than 2, Merge not required.");
-            return zipCodes;
+        if (zipCodes == null || zipCodes.length ==0)
+        {
+            logger.info("zipCodes is null or empty.");
+            return null;
         }
 
-        Arrays.sort(zipCodes);
+        result = new ArrayList<>();
+
+        if (zipCodes.length == 1)
+        {
+            logger.info("Only one zip code range provided, nothing to merge");
+            result.add(zipCodes[0]);
+            return result;
+        }
+
         result.add(zipCodes[0]);
 
         for (int counter = 1; counter < zipCodes.length; counter++) {
@@ -24,23 +54,21 @@ public class ZipCodeHelper {
 
             if (last.getEnd() < zipCodes[counter].getStart())
             {
-                out.printf("New range %s found, so adding to the result.\n", zipCodes[counter].toString());
+                logger.debug("New range "+ zipCodes[counter].toString() + " found, so adding to the result.");
                 result.add(zipCodes[counter]);
             }
             else if (last.getEnd() < zipCodes[counter].getEnd()) //Case 2
             {
-                out.printf("Overlap range %s found, so merging to last one in the result.\n", zipCodes[counter].toString());
+                logger.debug("Overlap range " + zipCodes[counter].toString() + " found, so merging to last one in the result.");
                 result.get(result.size()-1).setEnd(zipCodes[counter].getEnd());
             }
             else
             {
-                out.printf("%s in previous range, so ignoring\n", zipCodes[counter].toString());
-                //Ignoring Case 1
+                logger.debug(zipCodes[counter].toString() + " in previous range, so ignoring.");
             }
         }
 
         Collections.sort(result);
-
-        return result.toArray(new ZipCodeRange[result.size()]);
+        return result;
     }
 }

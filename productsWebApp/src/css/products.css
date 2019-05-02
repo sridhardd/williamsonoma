@@ -4,26 +4,28 @@
   outline: 0;
 }
 
-@media only screen and (min-width: 900px)
+.column
 {
-    .column {
-      float: left;
-      width: 33%;
-    }
-}
-
-@media only screen and (max-width: 400px)
-{
-.column {
   float: left;
-  width: 50%;
-}
+  width: 33%;
 }
 
-.row:after {
+
+.row:after
+{
   content: "";
   display: table;
   clear: both;
+}
+
+.image_main
+{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    position: relative;
+    width: 25vw;
+    height: 50vh;
 }
 
 .title
@@ -35,25 +37,33 @@
     color: #363636;
     background: rgb(0, 0, 0);
     background: rgba(238, 235, 235, 0.3);
+    display: none;
+    width: 25vw;
 }
 
-.image_main
+.image_product
 {
+    margin-top: 20px;
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px;
     position: relative;
+    width: 25vw;
+    height: 50vh;
 }
 
-.detail_right {
+/* Product Popup detail styles*/
+
+.detail_right
+{
   float: left;
-  width: 50%;
+  width: 60%;
 }
 
 .detail_left
 {
   float: left;
-  width: 50%;
+  width: 40%;
 }
 
 .detail_title
@@ -84,8 +94,8 @@
     border: 1px solid #ddd;
     border-radius: 2px;
     padding: 5px;
-    width: 180px;
-    height: 100px;
+    width: 100px;
+    height: 50px;
 }
 
 .carousel
@@ -96,10 +106,115 @@
       align-items : center;
 }
 
+.close_icon
+{
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    cursor: pointer;
+}
+
 .carousel_navigator
 {
     font-weight: bold;
     font-size: 40px;
     color: grey;
     cursor: pointer;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.product-detail-outer
+{
+    visibility:hidden;
+    background:#ffffff;
+    border:3px solid #666666;
+    width:70vw;
+    height:70vh;
+    position: fixed;
+    top: 20%;
+    left: 20%;
+    margin-top: -50px;
+    margin-left: -100px;
+}
+
+.disable-background-scroll {
+  height: 100%;
+  overflow: hidden;
+}
+
+.product-detail-outer.active
+{
+    visibility:visible;
+    text-align:center;
+}
+
+.product-detail
+{
+    visibility:hidden;
+}
+
+.product-detail.active
+{
+    visibility:visible;
+}
+
+@media only screen and (max-width: 500px)
+{
+    .column
+    {
+      width: 50%;
+    }
+
+    .image_main
+    {
+        width: 40vw;
+        height: 40vh;
+    }
+
+    .title
+    {
+        width: 40vw;
+    }
+
+    .detail_left
+    {
+        width: 100%;
+    }
+
+    .detail_right
+    {
+        width: 100%;
+    }
+
+    .carousel_navigator
+    {
+        font-size: 20px;
+    }
+
+    .image_product
+    {
+        margin-top: 0;
+        width: 60vw;
+        height: 40vh;
+    }
+
+    .detail_title
+    {
+        font-size: 20px;
+        height: 50px;
+    }
+
+    .product-detail-outer
+    {
+        width:75vw;
+        height:75vh;
+        left: 30%;
+    }
+
+    .close_icon
+    {
+        width: 15px;
+        height: 15px;
+    }
 }
